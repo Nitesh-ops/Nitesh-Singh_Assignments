@@ -61,7 +61,7 @@ class Employee{
 }
 public class Question1 {
 	public static void main(String[] args) {
-		HashSet<Employee> emp=new HashSet<>();
+		Set<Employee> emp=new HashSet<>();
 		emp.add(new Employee(1213, "Nitesh",50000,"ASE"));
 		emp.add(new Employee(1214, "JK",35000,"SE"));
 		for(Employee e : emp){
