@@ -8,11 +8,13 @@ import java.util.TreeMap;
 
 public class Question1 {
 	public static void main(String[] args) {
-		Contact c1=new Contact(9878500485L,"Nitesh", "Nitesh@gmail.com", "Male");
-		Contact c2=new Contact(7845104874L,"Vikash", "Vikash@gmail.com", "Male");
-		Contact c3=new Contact(7524879604L,"Ashi", "Ashi@gmail.com", "Female");
-		Contact c4=new Contact(8405174210L,"Monika", "Monika@gmail.com", "Female");
-		Contact c5=new Contact(8745487424L,"Sorav", "Sorav@gmail.com", "Male");
+		Contact.Gender m= Contact.Gender.Male;
+		Contact.Gender f= Contact.Gender.Female;
+		Contact c1=new Contact(9878500485L,"Nitesh", "Nitesh@gmail.com", m);
+		Contact c2=new Contact(7845104874L,"Vikash", "Vikash@gmail.com", m);
+		Contact c3=new Contact(7524879604L,"Ashi", "Ashi@gmail.com", f);
+		Contact c4=new Contact(8405174210L,"Monika", "Monika@gmail.com", f);
+		Contact c5=new Contact(8745487424L,"Sorav", "Sorav@gmail.com", m);
 		
 		Map<Long, Contact> det=new TreeMap<>();
 		det.put(c1.getPhoneNumber(),c1);

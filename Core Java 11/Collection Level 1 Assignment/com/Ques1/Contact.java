@@ -4,15 +4,18 @@ public class Contact implements Comparable<Contact>{
 private Long PhoneNumber;
 private String Name;
 private String Email;
-private String Gender;
+private Gender Gend;
+public enum Gender{
+	Male,Female
+}
 
 
-	public Contact(Long phoneNumber, String name, String email, String gender) {
+	public Contact(Long phoneNumber, String name, String email, Gender gend) {
 	super();
 	PhoneNumber = phoneNumber;
 	Name = name;
 	Email = email;
-	Gender = gender;
+	Gend = gend;
 }
 
 	public Long getPhoneNumber() {
@@ -27,13 +30,13 @@ public String getEmail() {
 	return Email;
 }
 
-public String getGender() {
-	return Gender;
+public Gender getGender() {
+	return Gend;
 }
 
 	@Override
 public String toString() {
-	return "Contact [PhoneNumber=" + PhoneNumber + ", Name=" + Name + ", Email=" + Email + ", Gender=" + Gender + "]";
+	return "Contact [PhoneNumber=" + PhoneNumber + ", Name=" + Name + ", Email=" + Email + ", Gender=" + Gend + "]";
 }
 
 	@Override
