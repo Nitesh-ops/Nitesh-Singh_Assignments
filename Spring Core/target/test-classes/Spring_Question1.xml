@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="setAddress" class="com.Question1_Assignment.Address">
+		<property name="street" value="3"></property>
+		<property name="city" value="Gurgaon"></property>
+		<property name="state" value="Haryana"></property>
+		<property name="zip" value="122001"></property>
+		<property name="country" value="India"></property>
+	</bean>
+
+	<bean id="custDetail" class="com.Question1_Assignment.Customer">
+		<property name="customerId" value="11614"></property>
+		<property name="customerName" value="Nitesh Singh"></property>
+		<property name="customerContact" value="1234567890"></property>
+		<property name="cusAddress" ref="setAddress"></property>
+	</bean>
+
+
+	<bean id="setAddressConstructor"
+		class="com.Question1_Assignment.AddressConstructorInjection">
+		<constructor-arg value="118"></constructor-arg>
+		<constructor-arg value="Phagwara"></constructor-arg>
+		<constructor-arg value="Punjab"></constructor-arg>
+		<constructor-arg value="125505"></constructor-arg>
+		<constructor-arg value="India"></constructor-arg>
+	</bean>
+
+	<bean id="custDetailConstructor"
+		class="com.Question1_Assignment.CustomerConstructorInjection">
+		<constructor-arg value="120177"></constructor-arg>
+		<constructor-arg value="Mohit Sain"></constructor-arg>
+		<constructor-arg value="123479"></constructor-arg>
+		<constructor-arg ref="setAddressConstructor" />
+	</bean>
+
+</beans>

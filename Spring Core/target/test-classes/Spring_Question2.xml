@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <bean id="ansList" class="com.Question2_Assignment.Question_List">
+        	<property name="questionId" value="1123"></property>
+        	<property name="question" value="What is the synonym of beautiful?"></property>
+        	<property name="answers">
+	        	<list>
+	     			 <value>attractive</value>
+	     			 <value>pretty</value>
+	     			 <value>lovely</value>
+	        	</list>
+        	</property>
+        </bean>
+        
+        <bean id="ansSet" class="com.Question2_Assignment.Question_Set">
+        	<property name="questionId" value="1124"></property>
+        	<property name="question" value="What is the synonym of heterogeneous?"></property>
+        	<property name="answers">
+	        	<set>
+	     			 <value>diverse</value>
+	     			 <value>mixed</value>
+	     			 <value>different</value>
+	        	</set>
+        	</property>
+        </bean>
+        
+        <bean id="ansMap" class="com.Question2_Assignment.Question_Map">
+        	<property name="questionId" value="1125"></property>
+        	<property name="question" value="What is the synonym of conventional?"></property>
+        	<property name="answers">
+	        	<map>
+	     			<entry key = "0" value = "normal"/>
+		            <entry key = "1" value = "standard"/>
+		            <entry key = "2" value = "regular"/>
+		            <entry key = "3" value = "traditional"/>
+	        	</map>
+        	</property>
+        </bean>
+</beans>
