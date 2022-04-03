@@ -1,0 +1,250 @@
+import React, { useState, useEffect } from "react";
+import GetLocation from "./GetLocation";
+import axios from "axios";
+import { FaRegSun } from "react-icons/fa";
+import "./stylesheets/stylesheets.css";
+
+function WeatherApp() {
+  const location = GetLocation();
+  const { latitude, longitude } = location.coordinates;
+  const [weatherData1, setWeatherData1] = useState({});
+  const [weatherData2, setWeatherData2] = useState({});
+
+  const API_endpoint1 = `https://api.openweathermap.org/data/2.5/weather?`;
+  const API_endpoint2 = `https://api.openweathermap.org/data/2.5/onecall?`;
+  const API_key = `2a63c27d8ba0b0d14c9e5d59f39ee1ba`;
+
+  //   const getFirstObject = async () => {
+  //     await axios
+  //       .get(`${API_endpoint1}lat=28.4360704&lon=77.021184&appid=${API_key}`)
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         setWeatherData1(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+
+  const getSecondObject = async () => {
+    const data = await fetch(
+      `${API_endpoint2}lat=28.4360704&lon=77.021184&units=metric&appid=${API_key}`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setWeatherData2(result);
+        console.log(result);
+      });
+
+    // let user = await data.resp;
+    // setWeatherData2(user);
+    // console.log(weatherData2.current.temp);
+
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setWeatherData2(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await fetch(
+  //       `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+  //     )
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         setData(result);
+  //         console.log(result);
+  //       });
+  //   };
+  //   fetchData();
+  // }, [lat, long]);
+
+  useEffect(() => {
+    getSecondObject();
+    // getFirstObject();
+  }, []);
+
+  return (
+    <div className="mainDiv">
+      <div className="heading">
+        <h1>
+          <FaRegSun /> Weather
+        </h1>
+      </div>
+      <div>
+        {/* {weatherData1.name}
+        <br /> */}
+        {Math.round(weatherData2.current.temp)}
+        <span>&#176;</span> || {Math.round(weatherData2.current.temp) - 2}
+        <span>&#176;</span>
+        <br />
+        <span className="temp">
+          {Math.round(weatherData2.current.temp)}
+          &#8451;
+        </span>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+dailinfo.daily[1]
+
+
+
+
+export default WeatherApp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from "react";
+import GetLocation from "./GetLocation";
+import axios from "axios";
+import { FaRegSun } from "react-icons/fa";
+import "./stylesheets/stylesheets.css";
+import Weather from "./Weather";
+import Slider from "react-slick";
+
+function WeatherApp() {
+  var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const location = GetLocation();
+  const { latitude, longitude } = location.coordinates;
+  const [loading, setLoading] = useState(true); // Loading state
+  const [weatherData1, setWeatherData1] = useState({});
+  const [weatherData2, setWeatherData2] = useState({});
+
+  const API_endpoint1 = `https://api.openweathermap.org/data/2.5/weather?`;
+  const API_endpoint2 = `https://api.openweathermap.org/data/2.5/onecall?`;
+  const API_key = `2a63c27d8ba0b0d14c9e5d59f39ee1ba`;
+
+  useEffect(() => {
+    async function getFirstObject() {
+      const response = await axios.get(
+        `${API_endpoint1}lat=28.4360704&lon=77.021184&units=metric&appid=${API_key}`
+      );
+      setWeatherData1(response.data);
+    }
+
+    async function getSecondObject() {
+      const response = await axios.get(
+        `${API_endpoint2}lat=28.4360704&lon=77.021184&units=metric&appid=${API_key}`
+      );
+      setWeatherData2(response.data);
+      setLoading(false); // Setting the loading state to false after data is set.
+      console.log(`${API_endpoint2}lat=28.4360704&lon=77.021184&units=metric&appid=${API_key}`)
+    }
+    getFirstObject();
+    getSecondObject();
+  }, []);
+
+  return (
+    <div className="mainDiv">
+      <div className="heading">
+        <h1>
+          <FaRegSun /> Weather
+        </h1>
+      </div>
+      <div className="weatherInfo">
+        {weatherData1.name}
+        <br />
+        {loading ? <p>Loading...</p> : <Weather weatherInfo={weatherData2} />}
+      </div>
+      <div className="dailyInfo">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h5> Daily </h5>
+            <Slider {...settings} style={{ maxWidth: "350px" }}>
+              {weatherData2.daily.map((dd) => (
+                <div key={dd.dt}>
+                  <img
+                    src="http://openweathermap.org/img/wn/50d@2x.png"
+                    alt="weatherImage"
+                  />
+                  <div className="grid-container">
+                    <div className="grid-item3">{Math.round(dd.temp.min)}<span>&#176;</span></div>
+                    <div className="grid-item4">&nbsp;&nbsp;{Math.round(dd.temp.max)}<span>&#176;</span></div>
+                  </div>
+                  <p>{dd.weather[0].main}</p>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        )}
+      </div>
+      <div className="hourlyInfo">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h5> Hourly </h5>
+            <Slider {...settings} style={{ maxWidth: "350px" }}>
+              {weatherData2.hourly.slice(0, 23).map((hh) => (
+                <div key={hh.dt}>
+                  <img
+                    src="http://openweathermap.org/img/wn/50d@2x.png"
+                    alt="weatherImage"
+                  />
+                    <p>{Math.round(hh.temp)}<span>&#176;</span></p>
+                  <p>{hh.weather[0].main}</p>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default WeatherApp;
