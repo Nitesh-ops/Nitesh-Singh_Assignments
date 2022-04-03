@@ -1,0 +1,19 @@
+.doubleb {
+    border: 8px solid black;
+    border-collapse: collapse;
+}
+
+.singleb {
+    border: 5px solid black;
+    border-collapse: collapse;
+}
+
+.single {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+span {
+    display: block;
+    background-color: #E0FFFF;
+}
